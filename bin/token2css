@@ -1,0 +1,61 @@
+#!/usr/bin/env node
+
+const fs = require("fs");
+const getStdin = require("get-stdin");
+const path = require("path");
+const YAML = require("yaml").default;
+const argv = require("yargs")
+  .usage("Usage: $0 -i [src] -f [format] [options]")
+  .option("i", {
+    alias: "input",
+    coerce: path.resolve,
+    demandOption: false,
+    describe: "input file (default stdin)",
+    type: "string"
+  })
+  .option("o", {
+    alias: "output",
+    coerce: path.resolve,
+    demandOption: false,
+    describe: "output file (default stdout)",
+    type: "string"
+  })
+  .option("f", {
+    alias: "format",
+    choices: ["less", "sass", "scss", "stylus"],
+    default: "scss",
+    demandOption: false,
+    describe: "preprocessor variable format",
+    type: "string"
+  }).argv;
+
+const process = function(file) {
+  const parsed = (function () {
+    try {
+      return JSON.parse(file);
+    } catch (json_err) {
+      try {
+        return YAML.parse(file);
+      } catch (yaml_err) {
+        process.exitCode = 1;
+        throw new Error("Unable to parse the file as JSON or YAML");
+      }
+    }
+  })();
+
+  const output =
+    require("../index.js")({ format: argv.format })(parsed).join("\n") + "\n";
+
+  argv.output ? fs.writeFileSync(argv.output, output) : fs.writeSync(1, output);
+};
+
+if (argv.input) {
+  process(fs.readFileSync(argv.input, "utf-8"));
+} else {
+  getStdin().then(function(input) {
+    if (!input) return;
+    process(input);
+  }).catch(function (e) {
+    console.error(e);
+  });
+}
