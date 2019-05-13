@@ -33,6 +33,7 @@ color:
 button:
   border-radius: 5px
   min-width: 60px
+  font-weight: 300
   padding: 7px 12px
   variant:
     primary:
@@ -52,6 +53,7 @@ $color--grey--50: #787878;
 $color--grey--85: #dddddd;
 $button--border-radius: 5px;
 $button--min-width: 60px;
+$button--font-weight: 300;
 $button--padding: 7px 12px;
 $button--variant--primary--background-color: $color--blue--50;
 $button--variant--primary--border: 1px solid $color--blue--25;

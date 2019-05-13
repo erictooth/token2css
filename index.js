@@ -1,3 +1,11 @@
+const normalizePrimitives = value => {
+  if (typeof value === "number") {
+    return value + "";
+  }
+
+  return value;
+};
+
 module.exports = function({ format }) {
   const formatVariable = (key, value) => {
     switch (format) {
@@ -18,13 +26,13 @@ module.exports = function({ format }) {
     let tokens = [];
 
     if (typeof prop === "string" || typeof prop === "number") {
-      tokens.push(formatVariable(token, prop));
+      tokens.push(formatVariable(token, normalizePrimitives(prop)));
     } else if (typeof prop === "object") {
       tokens = tokens.concat(
         [].concat(
           ...Object.entries(prop).map(([key, value]) => {
             const prevStr = token ? `${token}--` : "";
-            return toString(`${prevStr}${key}`, value);
+            return toString(`${prevStr}${key}`, normalizePrimitives(value));
           })
         )
       );
