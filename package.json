@@ -1,6 +1,6 @@
 {
   "name": "token2css",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "token2css takes a list of design tokens in a structured format such as JSON or YAML and converts them to a list of CSS preprocessor variables",
   "main": "index.js",
   "bin": {
