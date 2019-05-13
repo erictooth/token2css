@@ -27,7 +27,7 @@ module.exports = function({ format }) {
       tokens = tokens.concat(
         [].concat(
           ...Object.entries(prop).map(([key, value]) => {
-            if (typeof vlaue === "number") {
+            if (typeof value === "number") {
               value = value + "";
             }
 
