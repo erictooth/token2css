@@ -91,6 +91,9 @@
         "verbose": true,
         "collectCoverage": true,
         "coverageDirectory": "<rootDir>/coverage",
+        "testMatch": [
+            "**/src/**/__tests__/**/*.test.ts"
+        ],
         "coverageReporters": [
             "text",
             "text-summary",
