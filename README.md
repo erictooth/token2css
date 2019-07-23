@@ -101,7 +101,7 @@ button:
 Output:
 
 ```scss
-$button--disabled-background-color: grey;
+$button--disabled--background-color: grey;
 ```
 
 - If you want to reference a variable, always perpend the name with `$` — regardless of the target variable syntax you choose. `$` indicates that the following value is a variable and allows it to be reformatted for other languages.
