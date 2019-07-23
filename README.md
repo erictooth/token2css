@@ -13,7 +13,7 @@ cat ./tokens.yaml | npx token2css -f stylus > output.styl
 With input/output flags
 
 ```bash
-npx token2css -i ./tokens.json -f scss -o output.scss
+npx token2css ./tokens.json -f scss -o output.scss
 ```
 
 ## Example
@@ -104,7 +104,7 @@ Output:
 $button--disabled-background-color: grey;
 ```
 
-- If you want to reference a variable, always prepend the name with `$` — regardless of the target variable syntax you choose. `$` indicates that the following value is a variable and allows it to be reformatted for other languages.
+- If you want to reference a variable, always perpend the name with `$` — regardless of the target variable syntax you choose. `$` indicates that the following value is a variable and allows it to be reformatted for other languages.
 
 ```yaml
     color:
