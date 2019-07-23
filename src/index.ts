@@ -38,10 +38,10 @@ export default async function main() {
         const parsed = (function() {
             try {
                 return JSON.parse(file);
-            } catch (json_err) {
+            } catch (jsonErr) {
                 try {
                     return YAML.safeLoad(file);
-                } catch (yaml_err) {
+                } catch (yamlErr) {
                     process.exitCode = 1;
                     throw new Error("Unable to parse the file as JSON or YAML");
                 }

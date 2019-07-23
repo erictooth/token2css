@@ -2,7 +2,6 @@
     "name": "token2css",
     "version": "2.0.0",
     "description": "token2css takes a list of design tokens in a structured format such as JSON or YAML and converts them to a list of CSS preprocessor variables",
-    "main": "index.js",
     "repository": {
         "type": "git",
         "url": "https://github.com/erictooth/token2css.git"
@@ -23,8 +22,8 @@
         "style"
     ],
     "scripts": {
-        "clean": "rimraf pkg/**",
-        "build": "npm run clean && pack build",
+        "build": "npm run lint && pack build",
+        "lint": "eslint src/*.ts",
         "test": "jest"
     },
     "@pika/pack": {
@@ -65,11 +64,37 @@
         "@types/jest": "^24.0.15",
         "@types/js-yaml": "^3.12.1",
         "@types/yargs": "^13.0.0",
-        "eslint": "^5.16.0",
+        "@typescript-eslint/parser": "^1.13.0",
+        "eslint": "^6.0.1",
         "jest": "^24.8.0",
         "prettier": "^1.18.2",
-        "rimraf": "^2.6.3",
         "ts-jest": "^24.0.2",
         "typescript": "^3.5.3"
+    },
+    "prettier": "@erictooth/prettier-config",
+    "eslintConfig": {
+        "parser": "@typescript-eslint/parser",
+        "env": {
+            "node": true
+        },
+        "extends": [
+            "@erictooth/eslint-config",
+            "@erictooth/eslint-config/typescript"
+        ]
+    },
+    "eslintIgnore": [
+        "src/**/__tests__"
+    ],
+    "jest": {
+        "preset": "ts-jest",
+        "testEnvironment": "node",
+        "verbose": true,
+        "collectCoverage": true,
+        "coverageDirectory": "<rootDir>/coverage",
+        "coverageReporters": [
+            "text",
+            "text-summary",
+            "html"
+        ]
     }
 }

@@ -21,9 +21,9 @@ export function token2css({ format }: { format: Formats }) {
             case "stylus":
                 return `${key} = ${value.replace("$", "")};`;
             case "sass":
-                return `\$${key}: ${value}`;
+                return `$${key}: ${value}`;
             case "scss":
-                return `\$${key}: ${value};`;
+                return `$${key}: ${value};`;
             case "less":
                 return `@${key}: ${value.replace("$", "@")};`;
             default:
@@ -43,10 +43,7 @@ export function token2css({ format }: { format: Formats }) {
                     ...Object.entries(prop).map(([key, value]: [string, string]) => {
                         const prevStr = token ? `${token}--` : "";
 
-                        return toString(
-                            `${prevStr}${key}`,
-                            normalizeValues(value)
-                        );
+                        return toString(`${prevStr}${key}`, normalizeValues(value));
                     })
                 )
             );
@@ -58,4 +55,4 @@ export function token2css({ format }: { format: Formats }) {
     return function(parsed: string) {
         return toString("", parsed);
     };
-};
+}
